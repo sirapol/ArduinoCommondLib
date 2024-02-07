@@ -370,3 +370,28 @@ double round2(double value)
 {
     return (int)(value * 100 + 0.5) / 100.0;
 }
+
+/**************************************************************************/
+/*!
+  \brief fix floating point to 2dicimal
+  @param destination
+  @param source
+*/
+/**************************************************************************/
+void copyMacAddress(uint8_t *destination, const uint8_t *source)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        destination[i] = source[i];
+    }
+}
+
+String getMacAddressToString(const uint8_t *mac_addr)
+{
+    char addr[18]; // MAC address is 6 bytes, each byte is represented by 2 characters (hexadecimal) and 5 colons in between
+    sprintf(addr, "%02X:%02X:%02X:%02X:%02X:%02X",
+            mac_addr[0], mac_addr[1], mac_addr[2],
+            mac_addr[3], mac_addr[4], mac_addr[5]);
+    String strAddr = String(addr);
+    return strAddr;
+}

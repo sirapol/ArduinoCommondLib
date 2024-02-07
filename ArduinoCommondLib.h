@@ -154,3 +154,21 @@ bool i2cCheck(uint8_t addr);
 */
 /**************************************************************************/
 double round2(double value);
+
+/**************************************************************************/
+/*!
+  \brief copy mac address from source to destination
+  @param destination
+  @param source
+*/
+/**************************************************************************/
+void copyMacAddress(uint8_t *destination, const uint8_t *source);
+
+/**************************************************************************/
+/*!
+  \brief get mac address to String
+  @param mac_addr
+  @return String mac address
+*/
+/**************************************************************************/
+String getMacAddressToString(const uint8_t *mac_addr);
