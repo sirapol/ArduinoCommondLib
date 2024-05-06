@@ -6,11 +6,19 @@
 #define USB_SERIAL Serial
 #define USB_SERIAL_TIMEOUT 1000
 #define USB_SERIAL_BAUD 115200
+#define USB_SERIAL_BAUD_115K 115200
+#define USB_SERIAL_BAUD_250K 250000
+#define USB_SERIAL_BAUD_500K 500000
+#define USB_SERIAL_BAUD_1M 1000000
+#define USB_SERIAL_BAUD_2M 2000000
 #endif
 
-#include <Arduino.h>
+// #include <Arduino.h>
 
 #ifdef ARDUINO_ARCH_ESP32
+#include <ESP32Time.h>
+#define TIME_OFFSET +7
+
 #include <Esp.h>
 #include <SPIFFS.h>
 /**************************************************************************/
@@ -91,7 +99,7 @@ bool renameFile(fs::FS &fs, const char *path1, const char *path2);
 bool deleteFile(fs::FS &fs, const char *path);
 
 #elif defined(ARDUINO_ARCH_AVR)
-
+#include <Arduino.h>
 #else
 
 #endif

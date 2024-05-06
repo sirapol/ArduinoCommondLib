@@ -1,6 +1,8 @@
 #include "ArduinoCommondLib.h"
 
 #ifdef ARDUINO_ARCH_ESP32
+ESP32Time esp32Rtc(60 * 60 * TIME_OFFSET);
+
 /**************************************************************************/
 /*!
   \brief ESP get chip id
@@ -51,11 +53,18 @@ void listFile(fs::FS &fs)
     // ls spiffs
     File root = fs.open("/");
     File file = root.openNextFile();
-    while (file)
+    if (file)
     {
-        // USB_SERIAL.print("FILE: ");
-        // USB_SERIAL.println(file.name());
-        file = root.openNextFile();
+        while (file)
+        {
+            USB_SERIAL.print("FILE: ");
+            USB_SERIAL.println(file.name());
+            file = root.openNextFile();
+        }
+    }
+    else
+    {
+        USB_SERIAL.println("File not found");
     }
 }
 
