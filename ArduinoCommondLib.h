@@ -16,7 +16,7 @@
 // #include <Arduino.h>
 
 #ifdef ARDUINO_ARCH_ESP32
-#include <ESP32Time.h>
+#include <ESP32Time.h> // https://github.com/fbiego/ESP32Time version : 2.0.6
 #define TIME_OFFSET +7
 
 #include <Esp.h>
