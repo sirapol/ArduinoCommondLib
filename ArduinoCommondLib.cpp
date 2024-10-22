@@ -67,6 +67,85 @@ void listFile(fs::FS &fs)
         USB_SERIAL.println("File not found");
     }
 }
+/**************************************************************************/
+/*!
+  \brief list all file in partition
+  @param fs
+  @param dirname
+  @param levels
+*/
+/**************************************************************************/
+void listDir(fs::FS &fs, const char *dirname, uint8_t levels)
+{
+    USB_SERIAL.printf("Listing directory: %s\n", dirname);
+    File root = fs.open(dirname);
+    if (!root)
+    {
+        USB_SERIAL.println("Failed to open directory");
+        return;
+    }
+    if (!root.isDirectory())
+    {
+        USB_SERIAL.println("Not a directory");
+        return;
+    }
+
+    File file = root.openNextFile();
+    while (file)
+    {
+        if (file.isDirectory())
+        {
+            USB_SERIAL.print("  DIR : ");
+            USB_SERIAL.println(file.name());
+            if (levels)
+            {
+                listDir(fs, file.name(), levels - 1);
+            }
+        }
+        else
+        {
+            USB_SERIAL.print("  FILE: ");
+            USB_SERIAL.print(file.name());
+            USB_SERIAL.print("  SIZE: ");
+            USB_SERIAL.println(file.size());
+        }
+        file = root.openNextFile();
+    }
+}
+
+
+/**************************************************************************/
+/*!
+  \brief list all file in partition
+  @param fs
+  @param path
+*/
+/**************************************************************************/
+void createDir(fs::FS &fs, const char * path){
+  USB_SERIAL.printf("Creating Dir: %s\n", path);
+  if(fs.mkdir(path)){
+    USB_SERIAL.println("Dir created");
+  } else {
+    USB_SERIAL.println("mkdir failed");
+  }
+}
+
+
+/**************************************************************************/
+/*!
+  \brief list all file in partition
+  @param fs
+  @param path
+*/
+/**************************************************************************/
+void removeDir(fs::FS &fs, const char * path){
+  Serial.printf("Removing Dir: %s\n", path);
+  if(fs.rmdir(path)){
+    Serial.println("Dir removed");
+  } else {
+    Serial.println("rmdir failed");
+  }
+}
 
 /**************************************************************************/
 /*!

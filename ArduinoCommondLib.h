@@ -47,6 +47,34 @@ void listFile(fs::FS &fs);
 
 /**************************************************************************/
 /*!
+  \brief list all file in partition
+  @param fs
+  @param dirname
+  @param levels
+*/
+/**************************************************************************/
+void listDir(fs::FS &fs, const char *dirname, uint8_t levels);
+
+/**************************************************************************/
+/*!
+  \brief list all file in partition
+  @param fs
+  @param path
+*/
+/**************************************************************************/
+void createDir(fs::FS &fs, const char *path);
+
+/**************************************************************************/
+/*!
+  \brief list all file in partition
+  @param fs
+  @param path
+*/
+/**************************************************************************/
+void removeDir(fs::FS &fs, const char *path);
+
+/**************************************************************************/
+/*!
   \brief Read all data in file.
   @param fs SPIFFS
   @param path file directory
