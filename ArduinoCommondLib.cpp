@@ -434,15 +434,18 @@ int dayOfWeek(uint16_t year, uint8_t month, uint8_t day)
 /**************************************************************************/
 bool i2cCheck(uint8_t addr)
 {
+    USB_SERIAL.printf("I2C Checl : 0x%x",addr);
     uint8_t error = 4;
     Wire.beginTransmission(addr);
     error = Wire.endTransmission();
     if (error == 0)
     {
+        USB_SERIAL.printf("\tFound\r\n");
         return true;
     }
     else
     {
+        USB_SERIAL.printf("\tNot Found\r\n");
         return false;
     }
 }
